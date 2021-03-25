@@ -6,7 +6,6 @@ for x in range (0,100):
     date = time.strftime('%Y-%m-%d %H:%M:%S', (time.localtime()))
     time.sleep(1)
     try:
-        #3.95.163.13
         send = requests.post("http://127.0.0.1/Enviar",data={
             "Maquina":maquina,
             "Time":date,
