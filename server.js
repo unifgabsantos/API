@@ -16,7 +16,7 @@ function EnviarDados(req, resp) {
         }
     };
     dados.push(info);
-    resp.send(data = { "Status": 200 })
+    resp.send({"Status_Code":200})
     console.log(info);
 };
 
@@ -29,7 +29,17 @@ function Index(req, resp) {
     resp.render("index");
 };
 
+function Clear(req,resp){
+    if (req.body.Password=="admin"){
+        dados = [];
+        resp.send("Clear");
+    }
+    else resp.send("Senha incorreta.")
+};
+
+
 server.post("/Enviar", EnviarDados);
+server.post("/Clear",Clear);
 server.get("/GetDados", GetDados);
 server.get("/", Index);
 server.listen(80);
