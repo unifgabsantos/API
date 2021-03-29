@@ -30,6 +30,7 @@ function PostDados(req, resp) {
 function DeleteDados(req, resp) {
     if (req.query.Senha == SECRET_KEY) {
         dados = [];
+        resp.send({ "Status": 200 });
     }
     else{
         resp.status(401);
