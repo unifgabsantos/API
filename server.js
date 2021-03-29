@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-const SECRET_KEY = require('./secret')
+const SECRET_KEY = "teste";
 const { response } = require('express');
 var server = express();
 server.use(bodyParser.urlencoded({ extended: false }));
