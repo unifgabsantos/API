@@ -1,6 +1,8 @@
-var temperaturas;
-var time;
-var dados;
+var temperaturas, time, dados;
+var max = 0;
+var min = 0;
+var temp = 0;
+var power = false;
 
 function GetDados() {
     temperaturas = [];
@@ -10,16 +12,14 @@ function GetDados() {
         if (requests.readyState == 4) {
             dados = JSON.parse(requests.responseText);
             for (i = 0; i < dados.length; i++) {
-                temperaturas.push(parseFloat(dados[i].Temperatura));
+                temp = parseFloat(dados[i].Temperatura);
+                temperaturas.push(temp);
                 time.push(dados[i].Time);
+                if (temp > max) max = temp;
+                else if (temp < min) min = temp;
             };
-            var linha = {
-                x: time,
-                y: temperaturas,
-                type: 'lines'
-            };
-            var data = [linha];
-            Plotly.newPlot('MyDiv', data);
+            Grafico();
+            Indicador();
             AlterarLed();
         };
     };
@@ -29,6 +29,31 @@ function GetDados() {
     } catch (e) {
         console.log(e);
     }
+}
+
+function Grafico() {
+    var linha = {
+        x: time,
+        y: temperaturas,
+        type: 'lines'
+    };
+    var data = [linha];
+    Plotly.newPlot('MyDiv', data);
+}
+
+function Indicador() {
+    var data = [{
+        domain: { x: [0, 1], y: [0, 1] },
+        value: temp,
+        title: { text: "Temperatura" },
+        type: "indicator",
+        mode: "gauge+number",
+        delta: { reference: 400.50 },
+        gauge: { axis: { range: [0, max] } }
+    }];
+
+    var layout = { width: 600, height: 400 };
+    Plotly.newPlot('Indicador', data, layout);
 }
 
 function AlterarLed() {
