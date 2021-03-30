@@ -2,8 +2,6 @@ var temperaturas, time, dados;
 var max = 0;
 var min = 0;
 var temp = 0;
-var power = false;
-
 function GetDados() {
     temperaturas = [];
     time = [];
@@ -38,7 +36,7 @@ function Grafico() {
         type: 'lines'
     };
     var data = [linha];
-    Plotly.newPlot('MyDiv', data);
+    Plotly.newPlot('Grafico', data);
 }
 
 function Indicador() {
@@ -58,15 +56,15 @@ function Indicador() {
 
 function AlterarLed() {
     if (temperaturas[(temperaturas.length) - 1] > 40) {
-        document.getElementById("led").innerHTML = '<div class="cabeca red red-light"></div><div class="base red"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div>'
+        document.getElementById("led").innerHTML = '<div class="led"><div class="cabeca red red-light"></div><div class="base red"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div></div>'
     } else if (temperaturas[(temperaturas.length) - 1] > 30) {
-        document.getElementById("led").innerHTML = '<div class="cabeca green green-light"></div><div class="base green"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div>'
+        document.getElementById("led").innerHTML = '<div class="led"><div class="cabeca green green-light"></div><div class="base green"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div></div>'
     } else if (temperaturas[(temperaturas.length) - 1] > 20) {
-        document.getElementById("led").innerHTML = '<div class="cabeca blue blue-light"></div><div class="base blue"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div>'
+        document.getElementById("led").innerHTML = '<div class="led"><div class="cabeca blue blue-light"></div><div class="base blue"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div></div>'
     } else if (temperaturas[(temperaturas.length) - 1] > 10) {
-        document.getElementById("led").innerHTML = '<div class="cabeca pink pink-light"></div><div class="base pink"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div>'
+        document.getElementById("led").innerHTML = '<div class="led"><div class="cabeca pink pink-light"></div><div class="base pink"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div></div>'
     } else {
-        document.getElementById('led').innerHTML = document.getElementById("led").innerHTML = '<div class="cabeca"></div><div class="base"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div>'
+        document.getElementById('led').innerHTML = document.getElementById("led").innerHTML = '<div class="led"><div class="cabeca"></div><div class="base"></div><div class="pernas"><div class="perna"></div><div class="perna curta"></div></div></div>'
     }
 }
 setInterval(GetDados, 1000);
