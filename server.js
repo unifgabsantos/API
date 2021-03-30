@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-const SECRET_KEY = "teste";
+const SECRET_KEY = "admin";
 const { response } = require('express');
 var server = express();
 server.use(bodyParser.urlencoded({ extended: false }));
@@ -28,14 +28,8 @@ function PostDados(req, resp) {
 };
 
 function DeleteDados(req, resp) {
-    if (req.query.Senha == SECRET_KEY) {
-        dados = [];
-        resp.send({ "Status": 200 });
-    }
-    else{
-        resp.status(401);
-        resp.send({ "Erro": "Senha Incorreta" });
-    }
+    dados = [];
+    resp.send("");
 };
 
 function Index(req, resp) {
@@ -45,5 +39,5 @@ function Index(req, resp) {
 server.get("/", Index);
 server.get("/Receber", GetDados);
 server.post("/Enviar", PostDados);
-server.post("/Deletar", DeleteDados);
+server.delete("/Deletar", DeleteDados);
 server.listen(80);
